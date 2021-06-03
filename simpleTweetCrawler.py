@@ -1,10 +1,4 @@
-API_KEY = 'BP7tNDh2UPbELpR1sQyiRtY6G'
-API_SECRET_KEY = 'XIjfoFhscRr4LqU7sheOYZ6DCOQXtBSZF1AEtaGGbrfVYndi20'
-token_acesso = '129916291-pUvGqrqwofqVHsNgvRIg7UkWR3yQW4Bdn54h5oHW'
-token_acesso_segredo = 'SzOnefG2Ss7at73XxFKmDYkJ4mr0bd5WHbWsn2PnWiHum'
-BEARER_TOKEN = 'AAAAAAAAAAAAAAAAAAAAAM0iQQEAAAAAZk1UJWFH97BC%2FlG8gJuHyAVe40c%3DK0kchtFbdTtVeG6Di8PvNYJuRQ6wwRiVkkfUQv11sCt3JCaA1w'
-
-
+# -*- coding: utf-8 -*-
 #@title Biblioteca de Funções
 def login_Twitter(chave_consumidor, segredo_consumidor, token_acesso, token_acesso_segredo):
 
@@ -21,9 +15,7 @@ def search_tweets(twitter, term, startDay, finalDay, maxItens):
               lang='pt',
               since=startDay,
               until=finalDay).items(maxItens)
-
-  
-  tweetsList = [tweet.text for tweet in tweets]
+  tweetsList = [tweet.text for tweet in tweets]
   return tweetsList
    
 def count_nouns_occurrencie(tweets):
@@ -36,7 +28,6 @@ def count_nouns_occurrencie(tweets):
     doc = sp(str(tweet))
     tweet_no_punct = [ token.orth_ for token in doc if not token.is_punct and token.pos_ in listNouns]
     nouns_in_tweet.append(tweet_no_punct)
-
   #Contar ocorrências
   all_words_no_punct = list(itertools.chain(*nouns_in_tweet))
   #Create counter
@@ -51,9 +42,7 @@ def plot_popular_words(wordsList, itensAmount, title):
                       y='frequency',
                       ax=ax,
                       color="purple")
-
-  ax.set_title(title)
-
+  ax.set_title(title)
   plt.show()
 
 def processTweetQuerie(term, startDay, finalDay, podium):
@@ -66,3 +55,9 @@ def processTweetQuerie(term, startDay, finalDay, podium):
          f'As {podium} mais usadas no período')
   wordsList = count_nouns_occurrencie(tweetsList)
   plot_popular_words(wordsList, podium, title)
+
+API_KEY = 'BP7tNDh2UPbELpR1sQyiRtY6G'
+API_SECRET_KEY = 'XIjfoFhscRr4LqU7sheOYZ6DCOQXtBSZF1AEtaGGbrfVYndi20'
+token_acesso = '129916291-pUvGqrqwofqVHsNgvRIg7UkWR3yQW4Bdn54h5oHW'
+token_acesso_segredo = 'SzOnefG2Ss7at73XxFKmDYkJ4mr0bd5WHbWsn2PnWiHum'
+BEARER_TOKEN = 'AAAAAAAAAAAAAAAAAAAAAM0iQQEAAAAAZk1UJWFH97BC%2FlG8gJuHyAVe40c%3DK0kchtFbdTtVeG6Di8PvNYJuRQ6wwRiVkkfUQv11sCt3JCaA1w'
