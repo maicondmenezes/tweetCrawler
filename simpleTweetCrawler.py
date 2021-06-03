@@ -46,7 +46,13 @@ def plot_popular_words(wordsList, itensAmount, title):
   plt.show()
 
 def processTweetQuerie(term, startDay, finalDay, podium):
-  twitterConn = login_Twitter(API_KEY, API_SECRET_KEY, token_acesso, token_acesso_segredo)
+  API_KEY = 'BP7tNDh2UPbELpR1sQyiRtY6G'
+  API_SECRET_KEY = 'XIjfoFhscRr4LqU7sheOYZ6DCOQXtBSZF1AEtaGGbrfVYndi20'
+  token_acesso = '129916291-pUvGqrqwofqVHsNgvRIg7UkWR3yQW4Bdn54h5oHW'
+  token_acesso_segredo = 'SzOnefG2Ss7at73XxFKmDYkJ4mr0bd5WHbWsn2PnWiHum'
+  BEARER_TOKEN = 'AAAAAAAAAAAAAAAAAAAAAM0iQQEAAAAAZk1UJWFH97BC%2FlG8gJuHyAVe40c%3DK0kchtFbdTtVeG6Di8PvNYJuRQ6wwRiVkkfUQv11sCt3JCaA1w'
+
+  twitterConn = login_Twitter(API_KEY, API_SECRET_KEY, token_acesso, token_acesso_segredo)
   tweetsList = search_tweets(twitterConn, term, startDay, finalDay, 2000)
   title = (f'Pesquisa de Tweets por Termos\n'
          f'Termos usados: {term}\n'
@@ -55,9 +61,3 @@ def processTweetQuerie(term, startDay, finalDay, podium):
          f'As {podium} mais usadas no período')
   wordsList = count_nouns_occurrencie(tweetsList)
   plot_popular_words(wordsList, podium, title)
-
-API_KEY = 'BP7tNDh2UPbELpR1sQyiRtY6G'
-API_SECRET_KEY = 'XIjfoFhscRr4LqU7sheOYZ6DCOQXtBSZF1AEtaGGbrfVYndi20'
-token_acesso = '129916291-pUvGqrqwofqVHsNgvRIg7UkWR3yQW4Bdn54h5oHW'
-token_acesso_segredo = 'SzOnefG2Ss7at73XxFKmDYkJ4mr0bd5WHbWsn2PnWiHum'
-BEARER_TOKEN = 'AAAAAAAAAAAAAAAAAAAAAM0iQQEAAAAAZk1UJWFH97BC%2FlG8gJuHyAVe40c%3DK0kchtFbdTtVeG6Di8PvNYJuRQ6wwRiVkkfUQv11sCt3JCaA1w'
