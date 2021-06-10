@@ -1,0 +1,7 @@
+{% if tweet %}
+
+<span>tweet.text</span>
+
+{% else %}
+    <p>No tweet are available.</p>
+{% endif %}

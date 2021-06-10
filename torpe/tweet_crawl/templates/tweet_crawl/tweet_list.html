@@ -1,0 +1,16 @@
+<h1>Querie Entry: {{querie.entry}}</h1>
+<p>
+    Performed on: {{querie.executed_on}} | from: {{querie.start_day}} | to: {{querie.end_day}}<br>
+    
+</p>
+
+Has crawled {{ total }} tweets.
+<br>
+    <ul>
+    {% for tweet in querie.tweet_set.all %}
+        <li>
+        <a href="{% url 'tweet_crawl:tweet' tweet.id %}">{{ tweet.id_str}}</a>
+        | {{tweet.created_at}} | {{tweet.created_by}} | {{tweet.text}}
+         </li>
+    {% endfor %}
+    </ul>

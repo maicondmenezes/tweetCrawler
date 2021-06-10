@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Torpe - Tweet Crawler</title>
+  </head>
+  <body>
+      <h1>Torpe - Tweet Crawler</h1>
+    <p>Just to made your own tweets dataset</p>
+    <br>
+    <br>
+    <form action="." method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <input type="submit" value="Go">
+    </form>
+  </body>
+</html>
