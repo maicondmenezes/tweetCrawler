@@ -1,4 +1,3 @@
-import datetime
 from .twapi import searchTweets
 from django.db import models
 from django.utils import timezone
@@ -6,22 +5,38 @@ from django.utils import timezone
 class Querie(models.Model):
    
     entry = models.CharField(max_length = 200)
-    start_day = models.DateTimeField('data de inicio da consulta')
-    end_day = models.DateTimeField('data de termino da consulta')
-    executed_on = models.DateTimeField('data de execução da consulta')
+    start_day = models.DateField('data de inicio da consulta')
+    end_day = models.DateField('data de termino da consulta')
+    executed_on = models.DateField('data de execução da consulta', default=timezone.now())
     max_itens = models.IntegerField(default=0)
     rank_size = models.IntegerField(default=5)
+    crawled_tweets = models.IntegerField(default=0)
     #Methods
     def __str__(self):
-        return self.entry
-    
-    def doTweetCrawling(self):
+        return self.entry    
+
+    def doTweetCrawling(self):  
         tweets_list = searchTweets(
             self.entry,
             self.start_day,
             self.end_day,
-            self.max_itens)
-        return tweets_list
+            10
+        )
+        tweets_amount = len(tweets_list)
+        if (tweets_amount !=0):
+            for tweet in tweets_list:
+                new_tweet = Tweet(
+                    id_str = tweet.id_str,
+                    created_at = tweet.created_at,
+                    created_by = tweet.author.id_str,
+                    querie = self,
+                    text = tweet.text
+                )                    
+                new_tweet.save()
+            tweets_amount = len(tweets_list)
+            self.crawled_tweets = tweets_amount
+            self.save()
+        return tweets_amount
 '''
     def rankingTweetsTerms(self, tweets_list):
         bag_of_nouns = twapi.extractTweetsNouns(tweets_list)

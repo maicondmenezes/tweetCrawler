@@ -6,6 +6,7 @@ from .forms import QuerieForm
 from django.template import loader
 
 def index(request):
+
     form = QuerieForm()
     if ( request.method == 'POST'):
         form = QuerieForm(request.POST)
@@ -20,19 +21,9 @@ def index(request):
                 end_day = querie_end_day, 
                 rank_size = querie_rank_size, 
                 executed_on = tz.now()
-            )
-            new_querie.save()
-            tweets = new_querie.doTweetCrawling()
-            if (tweets):
-                for tweet in tweets:
-                    new_tweet = Tweet(
-                        id_str = tweet.id_str,
-                        created_at = tweet.created_at,
-                        created_by = tweet.author.id_str,
-                        querie = new_querie.id,
-                        text = tweet.text
-                    )                    
-                    new_tweet.save()
+            )            
+            new_querie.save()            
+            new_querie.doTweetCrawling()
             return redirect('tweet_crawl:querie_list')
     elif(request.method == 'GET'):
             
