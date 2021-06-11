@@ -2,8 +2,8 @@
     <ul>
     {% for querie in queries %}
         <li>
-        <a href="{% 'tweet_crawl:tweet_list' querie.id %}">{{ querie.entry}}</a>
-         | {{querie.start_day}} | {{querie.end_day}} | {{querie.rank_size}} | {{querie.executed_on}}
+        <a href="{% url 'tweet_crawl:tweet_list' querie.id %}">{{ querie.entry}}</a> 
+        | {{querie.start_day}} | {{querie.end_day}} | {{querie.rank_size}} | {{querie.executed_on}}
         </li>
     {% endfor %}
     </ul>

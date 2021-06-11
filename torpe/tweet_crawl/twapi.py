@@ -1,11 +1,12 @@
 import datetime as dtm
 import tweepy as twp
+'''
 import pandas as pds
 import spacy as spc
 import itertools as itr 
 import collections as clt
 import mathplot_lib as plt
-
+'''
 
 #Chaves de acesso api do twitter
 API_KEY = 'BP7tNDh2UPbELpR1sQyiRtY6G'
@@ -73,6 +74,6 @@ def plotRanking(ranked_list, rank_size=10, title=''):
     
     return plt
     
-def processFullWorkflow(terms, start_day=dtm.now(), end_day=dtm.now(), max_itens=1000):
+def processFullWorkflow(terms, start_day=dtm.datetime.now(), end_day=dtm.datetime.now(), max_itens=1000):
     
     return 'ok'

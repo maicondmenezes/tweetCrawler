@@ -6,11 +6,17 @@
 
 Has crawled {{ total }} tweets.
 <br>
+    {% if total != 0 %}
     <ul>
-    {% for tweet in querie.tweet_set.all %}
+        {% for tweet in querie.tweet_set.all %}
         <li>
-        <a href="{% url 'tweet_crawl:tweet' tweet.id %}">{{ tweet.id_str}}</a>
-        | {{tweet.created_at}} | {{tweet.created_by}} | {{tweet.text}}
-         </li>
-    {% endfor %}
+            <a href="{% url 'tweet_crawl:tweet' tweet.id %}">{{ tweet.id_str}}</a>
+            | {{tweet.created_at}} 
+            | {{tweet.created_by}} 
+            | {{tweet.text}}
+        </li>
+        {% endfor %}
     </ul>
+    {% else %}
+        <p>No tweets found.</p>
+    {% endif %}

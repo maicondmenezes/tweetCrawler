@@ -1,5 +1,5 @@
 import datetime
-#from . import twapi
+from .twapi import searchTweets
 from django.db import models
 from django.utils import timezone
 
@@ -9,21 +9,20 @@ class Querie(models.Model):
     start_day = models.DateTimeField('data de inicio da consulta')
     end_day = models.DateTimeField('data de termino da consulta')
     executed_on = models.DateTimeField('data de execução da consulta')
-    max_itens = models.IntegerField(default=1000)
+    max_itens = models.IntegerField(default=0)
     rank_size = models.IntegerField(default=5)
     #Methods
     def __str__(self):
         return self.entry
     
-    '''
     def doTweetCrawling(self):
-        tweets_list = twapi.searchTweets(
-            self.querie_entry,
+        tweets_list = searchTweets(
+            self.entry,
             self.start_day,
             self.end_day,
             self.max_itens)
         return tweets_list
-   
+'''
     def rankingTweetsTerms(self, tweets_list):
         bag_of_nouns = twapi.extractTweetsNouns(tweets_list)
         ranked_terms = twapi.rankingItems(bag_of_nouns)
